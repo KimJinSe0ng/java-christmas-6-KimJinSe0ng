@@ -27,13 +27,18 @@ public class Result {
     private void showResult() {
         calculateTotalBeforeDiscount(); // 할인 전 총주문 금액
         calculateServiceMenu();
+        showBenefit();
+        calculateAllBenefit();
+        calculateTotalAfterBenefit();
+        calculateEventBadge();
+    }
+
+    private void showBenefit() {
+        System.out.println("<혜택 내역>");
         calculateBenefit();
         calculateWeekday();
         calculateWeekend();
         calculateSpecialDay();
-        calculateAllBenefit();
-        calculateTotalAfterBenefit();
-        calculateEventBadge();
     }
 
     public static Result from(Map<Menu, Integer> orderedItems, int date) {
