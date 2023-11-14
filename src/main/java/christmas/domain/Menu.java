@@ -19,4 +19,12 @@ public enum Menu {
     public boolean isBeverage() {
         return this == 제로콜라 || this == 레드와인 || this == 샴페인;
     }
+
+    public boolean isDessert() {
+        return this == 초코케이크 || this == 아이스크림;
+    }
+
+    public boolean isMain() {
+        return this == 티본스테이크 || this == 바비큐립 || this == 해산물파스타 || this == 크리스마스파스타;
+    }
 }
