@@ -31,6 +31,7 @@ public class Result {
         calculateWeekday();
         calculateWeekend();
         calculateSpecialDay();
+        calculateAllBenefit();
     }
 
     public static Result from(Map<Menu, Integer> orderedItems, int date) {
@@ -123,5 +124,11 @@ public class Result {
                 System.out.println("증정 이벤트: -" + 25000 + "원");
             }
         }
+    }
+
+    public void calculateAllBenefit() {
+        totalBenefit = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + (serviceMenu * 25000);
+        System.out.println("<총혜택 금액>");
+        System.out.println("-" + totalBenefit + "원");
     }
 }
