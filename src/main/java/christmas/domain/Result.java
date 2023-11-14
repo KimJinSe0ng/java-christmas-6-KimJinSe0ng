@@ -28,6 +28,7 @@ public class Result {
         calculateTotalBeforeDiscount(); // 할인 전 총주문 금액
         calculateServiceMenu();
         calculateBenefit();
+        calculateWeekday();
     }
 
     public static Result from(Map<Menu, Integer> orderedItems, int date) {
@@ -73,6 +74,24 @@ public class Result {
             System.out.println("없음");
         } else {
             System.out.println("크리스마스 디데이 할인: -" + dDayDiscount + "원");
+        }
+    }
+
+    public void calculateWeekday() {
+        if (Calendar.isWeekday(date)) {
+            int totalDessertCount = 0; // 디저트 카테고리의 총 개수
+
+            for (Map.Entry<Menu, Integer> entry : orderedItems.entrySet()) {
+                Menu menu = entry.getKey();
+                int quantity = entry.getValue();
+
+                // 디저트 카테고리인 경우 개수 합산
+                if (menu.isDessert()) {
+                    totalDessertCount += quantity;
+                }
+            }
+            weekdayDiscount = totalDessertCount * 2023;
+            System.out.println("평일 할인: -" + weekdayDiscount + "원");
         }
     }
 }
