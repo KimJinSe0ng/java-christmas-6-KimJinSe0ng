@@ -21,6 +21,13 @@ public class InputView {
     }
 
     public static Order createOrder() {
-        return null;
+        try {
+            String input = Console.readLine();
+
+            return Order.from(input);
+        } catch (ValidatorException exception) {
+            OutputView.println(exception.getMessage());
+            return createOrder();
+        }
     }
 }
