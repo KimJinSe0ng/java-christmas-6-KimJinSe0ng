@@ -14,16 +14,4 @@ public class ReservationController {
         OutputView.printMessage(PrintMessage.INPUT_INTRODUCE);
         return InputView.createReservation();
     }
-
-//    private static Reservation createReservation() {
-//        try {
-//            String input = Console.readLine();
-//            int date = Validator.convertStringToInt(input);
-//
-//            return Reservation.from(date);
-//        } catch (ValidatorException exception) {
-//            OutputView.println(exception.getMessage());
-//            return createReservation();
-//        }
-//    }
 }

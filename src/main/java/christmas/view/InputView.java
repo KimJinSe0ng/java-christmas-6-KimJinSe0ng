@@ -1,6 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.domain.Order;
 import christmas.domain.Reservation;
 import christmas.exception.ValidatorException;
 import christmas.validator.Validator;
@@ -19,4 +20,7 @@ public class InputView {
         }
     }
 
+    public static Order createOrder() {
+        return null;
+    }
 }
