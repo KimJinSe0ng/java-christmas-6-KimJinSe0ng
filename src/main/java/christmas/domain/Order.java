@@ -9,7 +9,6 @@ public class Order {
 
     private Order(Map<Menu, Integer> orderedItems) {
         this.orderedItems = orderedItems;
-//        printOrder();
     }
 
     public static Order from(String order) {
@@ -44,10 +43,7 @@ public class Order {
         }
     }
 
-//    public void printOrder() {
-//        System.out.println("주문 내역:");
-//        for (Map.Entry<Menu, Integer> entry : orderedItems.entrySet()) {
-//            System.out.println(entry.getKey() + ": " + entry.getValue() + "개");
-//        }
-//    }
+    public Map<Menu, Integer> getOrderedItems() {
+        return orderedItems;
+    }
 }

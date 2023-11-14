@@ -13,4 +13,8 @@ public class Reservation {
     public static Reservation from(int date) {
         return new Reservation(date);
     }
+
+    public int getDate() {
+        return date;
+    }
 }
