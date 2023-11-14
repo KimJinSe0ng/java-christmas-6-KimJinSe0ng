@@ -30,6 +30,7 @@ public class Result {
         calculateBenefit();
         calculateWeekday();
         calculateWeekend();
+        calculateSpecialDay();
     }
 
     public static Result from(Map<Menu, Integer> orderedItems, int date) {
@@ -111,6 +112,16 @@ public class Result {
             }
             weekendDiscount = totalMainCount * 2023;
             System.out.println("주말 할인: -" + weekendDiscount + "원");
+        }
+    }
+
+    public void calculateSpecialDay() {
+        if (Calendar.isSpecialDay(date)) {
+            specialDiscount = 1000;
+            System.out.println("특별 할인: -" + specialDiscount + "원");
+            if (serviceMenu == 1) {
+                System.out.println("증정 이벤트: -" + 25000 + "원");
+            }
         }
     }
 }
