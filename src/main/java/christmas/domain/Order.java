@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.validator.Validator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,9 +23,13 @@ public class Order {
 
         for (String item : items) {
             String[] parts = item.trim().split("-");
+            for (String part :
+                    parts) {
+                System.out.println("part = " + part);
+            }
             if (parts.length == 2) {
                 String menuName = parts[0];
-                int quantity = Integer.parseInt(parts[1]);
+                int quantity = Validator.convertStringToIntTwo(parts[1]);
 
                 Menu menu = getMenuByName(menuName);
                 orderMap.put(menu, quantity);
@@ -39,7 +44,7 @@ public class Order {
         try {
             return Menu.valueOf(menuName.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("유효하지 않은 메뉴입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 메뉴입니다. 다시 입력해 주세요.");
         }
     }
 

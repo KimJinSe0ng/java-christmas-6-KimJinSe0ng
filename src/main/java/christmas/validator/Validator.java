@@ -23,4 +23,13 @@ public class Validator {
         }
         return true;
     }
+
+    public static int convertStringToIntTwo(String input) {
+        try {
+            isNumeric(input);
+            return Integer.parseInt(input);
+        } catch (NumberFormatException exception) {
+            throw ValidatorException.of(ErrorMessage.INVALID_ORDER, exception);
+        }
+    }
 }
