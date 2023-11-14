@@ -33,6 +33,7 @@ public class Result {
         calculateSpecialDay();
         calculateAllBenefit();
         calculateTotalAfterBenefit();
+        calculateEventBadge();
     }
 
     public static Result from(Map<Menu, Integer> orderedItems, int date) {
@@ -137,5 +138,15 @@ public class Result {
         totalAfterBenefit = totalBeforeDiscount - (totalBenefit - (serviceMenu * 25000));
         System.out.println("<할인 후 예상 결제 금액>");
         System.out.println(totalAfterBenefit + "원");
+    }
+
+    public void calculateEventBadge() {
+        EventBadge badge = EventBadge.getBadge(totalBenefit);
+        System.out.println("<12월 이벤트 배지>");
+        if (badge != null) {
+            System.out.println(badge.getDescription());
+        } else {
+            System.out.println("없음");
+        }
     }
 }
