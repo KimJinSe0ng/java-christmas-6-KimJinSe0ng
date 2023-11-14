@@ -27,6 +27,7 @@ public class Result {
 
     private void showResult() {
         calculateTotalBeforeDiscount(); // 할인 전 총주문 금액
+        calculateServiceMenu();
     }
 
     public static Result from(Map<Menu, Integer> orderedItems, int date) {
@@ -50,6 +51,17 @@ public class Result {
         System.out.println("<할인 전 총주문 금액>");
         System.out.println(totalBeforeDiscount + "원");
         System.out.println();
+    }
+
+    public void calculateServiceMenu() {
+        if (totalBeforeDiscount >= 120000) {
+            serviceMenu = 1;
+            System.out.println("<증정 메뉴>");
+            System.out.println("샴페인 1개");
+            System.out.println();
+        } else {
+            System.out.println("없음");
+        }
     }
 
 }
