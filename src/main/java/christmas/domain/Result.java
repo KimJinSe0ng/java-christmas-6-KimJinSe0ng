@@ -32,6 +32,7 @@ public class Result {
         calculateWeekend();
         calculateSpecialDay();
         calculateAllBenefit();
+        calculateTotalAfterBenefit();
     }
 
     public static Result from(Map<Menu, Integer> orderedItems, int date) {
@@ -130,5 +131,11 @@ public class Result {
         totalBenefit = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + (serviceMenu * 25000);
         System.out.println("<총혜택 금액>");
         System.out.println("-" + totalBenefit + "원");
+    }
+
+    public void calculateTotalAfterBenefit() {
+        totalAfterBenefit = totalBeforeDiscount - (totalBenefit - (serviceMenu * 25000));
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(totalAfterBenefit + "원");
     }
 }
