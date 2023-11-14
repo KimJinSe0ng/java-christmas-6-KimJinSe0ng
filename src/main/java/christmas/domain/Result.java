@@ -29,6 +29,7 @@ public class Result {
         calculateServiceMenu();
         calculateBenefit();
         calculateWeekday();
+        calculateWeekend();
     }
 
     public static Result from(Map<Menu, Integer> orderedItems, int date) {
@@ -92,6 +93,24 @@ public class Result {
             }
             weekdayDiscount = totalDessertCount * 2023;
             System.out.println("평일 할인: -" + weekdayDiscount + "원");
+        }
+    }
+
+    public void calculateWeekend() {
+        if (Calendar.isWeekend(date)) {
+            int totalMainCount = 0;
+
+            for (Map.Entry<Menu, Integer> entry : orderedItems.entrySet()) {
+                Menu menu = entry.getKey();
+                int quantity = entry.getValue();
+
+                // 메인 요리인 경우 개수 합산
+                if (menu.isMain()) {
+                    totalMainCount += quantity;
+                }
+            }
+            weekendDiscount = totalMainCount * 2023;
+            System.out.println("주말 할인: -" + weekendDiscount + "원");
         }
     }
 }
