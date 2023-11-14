@@ -22,12 +22,12 @@ public class Result {
         this.orderedItems = orderedItems;
         this.date = date;
         showResult();
-//        applyDiscountAndEvent();
     }
 
     private void showResult() {
         calculateTotalBeforeDiscount(); // 할인 전 총주문 금액
         calculateServiceMenu();
+        calculateBenefit();
     }
 
     public static Result from(Map<Menu, Integer> orderedItems, int date) {
@@ -64,4 +64,15 @@ public class Result {
         }
     }
 
+    public void calculateBenefit() {
+        if (date <= 25) {
+            dDayDiscount = 900 + (date * 100);
+        }
+        if (dDayDiscount == 0) {
+            System.out.println("<혜택 내역>");
+            System.out.println("없음");
+        } else {
+            System.out.println("크리스마스 디데이 할인: -" + dDayDiscount + "원");
+        }
+    }
 }
