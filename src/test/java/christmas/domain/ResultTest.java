@@ -26,7 +26,7 @@ class ResultTest {
         assertEquals(125000, result.getTotalBeforeDiscount());
     }
 
-    @DisplayName("할인 전 총주문 금액으로 증정 메뉴 검증")
+    @DisplayName("할인 전 총주문 금액으로 증정 메뉴가 있는 것을 검증")
     @Test
     public void testCalculateServiceMenuWithDiscount() {
         // Given
@@ -41,5 +41,21 @@ class ResultTest {
 
         // Then
         assertEquals(1, result.getServiceMenu());
+    }
+
+    @DisplayName("할인 전 총주문 금액으로 증정 메뉴가 없는 것을 검증")
+    @Test
+    public void testCalculateServiceMenuWithoutDiscount() {
+        // Given
+        Map<Menu, Integer> orderedItems = new HashMap<>();
+        orderedItems.put(Menu.티본스테이크, 1);
+
+        int date = 20;
+
+        // When
+        Result result = Result.from(orderedItems, date);
+
+        // Then
+        assertEquals(0, result.getServiceMenu());
     }
 }
