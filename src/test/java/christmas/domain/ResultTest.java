@@ -58,4 +58,21 @@ class ResultTest {
         // Then
         assertEquals(0, result.getServiceMenu());
     }
+
+    @DisplayName("크리스마스 디데이 할인 검증")
+    @Test
+    public void testCalculateBenefitWithDDayDiscount() {
+        // Given
+        Map<Menu, Integer> orderedItems = new HashMap<>();
+        orderedItems.put(Menu.티본스테이크, 2);
+        orderedItems.put(Menu.초코케이크, 1);
+
+        int date = 25; // D-day
+
+        // When
+        Result result = Result.from(orderedItems, date);
+
+        // Then
+        assertEquals(3400, result.getdDayDiscount());
+    }
 }
