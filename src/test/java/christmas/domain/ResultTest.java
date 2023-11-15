@@ -67,12 +67,29 @@ class ResultTest {
         orderedItems.put(Menu.티본스테이크, 2);
         orderedItems.put(Menu.초코케이크, 1);
 
-        int date = 25; // D-day
+        int date = 25;
 
         // When
         Result result = Result.from(orderedItems, date);
 
         // Then
         assertEquals(3400, result.getdDayDiscount());
+    }
+
+    @DisplayName("총혜택 금액에 따른 배지 부여 검증")
+    @Test
+    public void testCalculateEventBadge() {
+        // Given
+        Map<Menu, Integer> orderedItems = new HashMap<>();
+        orderedItems.put(Menu.티본스테이크, 2);
+        orderedItems.put(Menu.초코케이크, 1);
+
+        int date = 20;
+
+        // When
+        Result result = Result.from(orderedItems, date);
+
+        // Then
+        assertEquals("산타", result.getBadge());
     }
 }
