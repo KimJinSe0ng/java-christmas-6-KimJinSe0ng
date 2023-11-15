@@ -20,4 +20,16 @@ class EventBadgeTest {
         assertEquals(EventBadge.STAR, badge, "별 배지");
     }
 
+    @DisplayName("배지가 트리인지 검증")
+    @Test
+    public void testGetBadge_Tree() {
+        // Given
+        int totalAfterBenefit = 9000;
+
+        // When
+        EventBadge badge = EventBadge.getBadge(totalAfterBenefit);
+
+        // Then
+        assertEquals(EventBadge.TREE, badge, "트리 배지");
+    }
 }
