@@ -1,7 +1,5 @@
 package christmas.domain;
 
-import christmas.view.OutputView;
-import christmas.view.messages.PrintMessage;
 import java.util.Map;
 
 public class Result {
@@ -14,6 +12,7 @@ public class Result {
     private int specialDiscount;
     private int totalBenefit;
     private int totalAfterBenefit;
+    private String badge;
 
     private Map<Menu, Integer> orderedItems;
     private int date;
@@ -21,24 +20,19 @@ public class Result {
     private Result(Map<Menu, Integer> orderedItems, int date) {
         this.orderedItems = orderedItems;
         this.date = date;
-        showResult();
+        calculateAllEvents();
     }
 
-    private void showResult() {
+    private void calculateAllEvents() {
         calculateTotalBeforeDiscount(); // 할인 전 총주문 금액
-        calculateServiceMenu();
-        showBenefit();
-        calculateAllBenefit();
-        calculateTotalAfterBenefit();
-        calculateEventBadge();
-    }
-
-    private void showBenefit() {
-        System.out.println("<혜택 내역>");
+        calculateServiceMenu(); // 증정메뉴
         calculateBenefit();
         calculateWeekday();
         calculateWeekend();
         calculateSpecialDay();
+        calculateAllBenefit();
+        calculateTotalAfterBenefit();
+        calculateEventBadge();
     }
 
     public static Result from(Map<Menu, Integer> orderedItems, int date) {
@@ -49,41 +43,22 @@ public class Result {
         for (Map.Entry<Menu, Integer> entry : orderedItems.entrySet()) {
             Menu menu = entry.getKey();
             int quantity = entry.getValue();
-
-            // 각 메뉴의 가격과 수량을 이용하여 총 주문 금액 계산
             int menuPrice = menu.getPrice();
             int subtotal = menuPrice * quantity;
 
-//            System.out.println(menu + "" + quantity + ", 가격: " + menuPrice + "원, 소계: " + subtotal + "원");
-
-            // 총 주문 금액 누적
             totalBeforeDiscount += subtotal;
         }
-        System.out.println("<할인 전 총주문 금액>");
-        System.out.println(totalBeforeDiscount + "원");
-        System.out.println();
     }
 
     public void calculateServiceMenu() {
         if (totalBeforeDiscount >= 120000) {
             serviceMenu = 1;
-            System.out.println("<증정 메뉴>");
-            System.out.println("샴페인 1개");
-            System.out.println();
-        } else {
-            System.out.println("없음");
         }
     }
 
     public void calculateBenefit() {
         if (date <= 25) {
             dDayDiscount = 900 + (date * 100);
-        }
-        if (dDayDiscount == 0) {
-            System.out.println("<혜택 내역>");
-            System.out.println("없음");
-        } else {
-            System.out.println("크리스마스 디데이 할인: -" + dDayDiscount + "원");
         }
     }
 
@@ -101,7 +76,6 @@ public class Result {
                 }
             }
             weekdayDiscount = totalDessertCount * 2023;
-            System.out.println("평일 할인: -" + weekdayDiscount + "원");
         }
     }
 
@@ -119,39 +93,66 @@ public class Result {
                 }
             }
             weekendDiscount = totalMainCount * 2023;
-            System.out.println("주말 할인: -" + weekendDiscount + "원");
         }
     }
 
     public void calculateSpecialDay() {
         if (Calendar.isSpecialDay(date)) {
             specialDiscount = 1000;
-            System.out.println("특별 할인: -" + specialDiscount + "원");
-            if (serviceMenu == 1) {
-                System.out.println("증정 이벤트: -" + 25000 + "원");
-            }
         }
     }
 
     public void calculateAllBenefit() {
         totalBenefit = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + (serviceMenu * 25000);
-        System.out.println("<총혜택 금액>");
-        System.out.println("-" + totalBenefit + "원");
     }
 
     public void calculateTotalAfterBenefit() {
         totalAfterBenefit = totalBeforeDiscount - (totalBenefit - (serviceMenu * 25000));
-        System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(totalAfterBenefit + "원");
     }
 
     public void calculateEventBadge() {
         EventBadge badge = EventBadge.getBadge(totalBenefit);
-        System.out.println("<12월 이벤트 배지>");
         if (badge != null) {
-            System.out.println(badge.getDescription());
-        } else {
-            System.out.println("없음");
+            this.badge = badge.getDescription();
         }
+        if (badge == null) {
+            this.badge = "없음";
+        }
+    }
+
+    public int getTotalBeforeDiscount() {
+        return totalBeforeDiscount;
+    }
+
+    public int getServiceMenu() {
+        return serviceMenu;
+    }
+
+    public int getdDayDiscount() {
+        return dDayDiscount;
+    }
+
+    public int getWeekdayDiscount() {
+        return weekdayDiscount;
+    }
+
+    public int getWeekendDiscount() {
+        return weekendDiscount;
+    }
+
+    public int getSpecialDiscount() {
+        return specialDiscount;
+    }
+
+    public int getTotalBenefit() {
+        return totalBenefit;
+    }
+
+    public int getTotalAfterBenefit() {
+        return totalAfterBenefit;
+    }
+
+    public String getBadge() {
+        return badge;
     }
 }

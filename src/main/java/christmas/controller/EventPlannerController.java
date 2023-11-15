@@ -9,5 +9,7 @@ public class EventPlannerController {
         Reservation reservation = ReservationController.inputReservation();
         Order order = OrderController.inputOrder();
         Result result = ResultController.createResult(order, reservation);
+        ResultController.printResult(result);
+
     }
 }

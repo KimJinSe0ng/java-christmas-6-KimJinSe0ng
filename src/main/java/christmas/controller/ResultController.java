@@ -12,4 +12,8 @@ public class ResultController {
         System.out.println();
         return Result.from(order.getOrderedItems(), reservation.getDate());
     }
+
+    public static void printResult(Result result) {
+        OutputView.printAllEvents(result);
+    }
 }
