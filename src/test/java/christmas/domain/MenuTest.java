@@ -49,4 +49,20 @@ class MenuTest {
         assertTrue(iceCream.isDessert(), "아이스크림은 디저트");
         assertFalse(pasta.isDessert(), "크리스마스파스타는 디저트가 아님");
     }
+
+    @DisplayName("메인요리인지 검증")
+    @Test
+    public void testIsMain() {
+        // Given
+        Menu steak = Menu.티본스테이크;
+        Menu ribs = Menu.바비큐립;
+        Menu pasta = Menu.크리스마스파스타;
+        Menu soup = Menu.양송이수프;
+
+        // Then
+        assertTrue(steak.isMain(), "티본스테이크는 메인요리");
+        assertTrue(ribs.isMain(), "바비큐립은 메인요리");
+        assertTrue(pasta.isMain(), "크리스마스파스타는 메인요리");
+        assertFalse(soup.isMain(), "양송이수프는 메인요리가 아님");
+    }
 }
