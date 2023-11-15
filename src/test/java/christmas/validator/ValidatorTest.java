@@ -136,4 +136,16 @@ class ValidatorTest {
                 () -> Validator.parseOrder(order));
         assertEquals(ErrorMessage.INVALID_ORDER.getMessage(), exception.getMessage());
     }
+
+    @DisplayName("메뉴 이름이 메뉴판에 없을 시 파싱이 가능한지 검증")
+    @Test
+    public void testParseOrder_InvalidMenuName() {
+        // Given
+        String order = "InvalidMenu-2";
+
+        // When/Then
+        ValidatorException exception = assertThrows(ValidatorException.class,
+                () -> Validator.parseOrder(order));
+        assertEquals(ErrorMessage.INVALID_ORDER.getMessage(), exception.getMessage());
+    }
 }
