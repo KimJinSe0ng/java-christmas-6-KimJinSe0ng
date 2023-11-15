@@ -58,13 +58,14 @@ public class Validator {
     public static Map<Menu, Integer> parseOrder(String order) {
         try {
             Map<Menu, Integer> orderMap = new HashMap<>();
-//            Set<Menu> uniqueMenus = new HashSet<>();
+            Set<Menu> uniqueMenus = new HashSet<>();
             String[] items = order.split(",");
             int count = 0;
             for (String item : items) {
                 String[] parts = item.split("-");
                 validateNonNumericString(parts[0]); // 처음 들어온 값이 숫자면 에러
                 Menu menu = getMenuByName(parts[0]);
+                isDuplicate(uniqueMenus, menu);
                 if (parts.length == 2) {
                     int quantity = convertOrderStringToInt(parts[1]);
                     isMinCount(quantity);
@@ -76,6 +77,12 @@ public class Validator {
             return orderMap;
         } catch (IllegalArgumentException exception) {
             throw ValidatorException.of(ErrorMessage.INVALID_ORDER, exception);
+        }
+    }
+
+    private static void isDuplicate(Set<Menu> uniqueMenus, Menu menu) {
+        if (!uniqueMenus.add(menu)) {
+            throw ValidatorException.from(ErrorMessage.INVALID_ORDER);
         }
     }
 
