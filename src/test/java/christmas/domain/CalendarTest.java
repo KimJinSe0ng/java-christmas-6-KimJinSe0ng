@@ -32,4 +32,17 @@ class CalendarTest {
         // Then
         assertFalse(result, "평일이 아님");
     }
+
+    @DisplayName("주말에 해당하는 날짜를 입력했을 때 검증")
+    @Test
+    public void testIsWeekend() {
+        // Given
+        int weekend = 9;
+
+        // When
+        boolean result = Calendar.isWeekend(weekend);
+
+        // Then
+        assertTrue(result, "주말이 맞음");
+    }
 }
