@@ -2,8 +2,10 @@ package christmas.validator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import christmas.domain.Menu;
 import christmas.exception.ErrorMessage;
 import christmas.exception.ValidatorException;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -105,5 +107,21 @@ class ValidatorTest {
 
         // Then
         assertFalse(result);
+    }
+
+    @DisplayName("메뉴 주문시 입력한 문자열이 파싱이 가능한지 검증")
+    @Test
+    public void testParseOrder_ValidOrder() {
+        // Given
+        String order = "티본스테이크-2,초코케이크-1";
+
+        // When
+        Map<Menu, Integer> result = Validator.parseOrder(order);
+
+        // Then
+        assertTrue(result.containsKey(Menu.티본스테이크));
+        assertEquals(2, result.get(Menu.티본스테이크));
+        assertTrue(result.containsKey(Menu.초코케이크));
+        assertEquals(1, result.get(Menu.초코케이크));
     }
 }
