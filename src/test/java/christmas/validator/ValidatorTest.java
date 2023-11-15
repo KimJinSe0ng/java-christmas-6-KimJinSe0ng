@@ -171,4 +171,16 @@ class ValidatorTest {
         // Then
         assertEquals(Menu.티본스테이크, result);
     }
+
+    @DisplayName("마지막에 쉼표를 입력하고 마친 경우 예외 처리 검증")
+    @Test
+    public void testValidateEndsWithDelimiter_EndsWithDelimiter() {
+        // Given
+        String input = "티본스테이크-2,";
+
+        // When, Then
+        ValidatorException exception = assertThrows(ValidatorException.class,
+                () -> Validator.validateEndsWithDelimiter(input));
+        assertEquals(ErrorMessage.ENDS_WITH_DELIMITER.getMessage(), exception.getMessage());
+    }
 }
