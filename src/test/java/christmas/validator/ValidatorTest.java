@@ -158,4 +158,17 @@ class ValidatorTest {
         // When/Then
         assertDoesNotThrow(() -> Validator.validateNonNumericString(input));
     }
+
+    @DisplayName("유효한 메뉴 이름으로 메뉴판에서 찾을 수 있는지 검증")
+    @Test
+    public void testGetMenuByName_ValidMenuName() {
+        // Given
+        String menuName = "티본스테이크";
+
+        // When
+        Menu result = Validator.getMenuByName(menuName);
+
+        // Then
+        assertEquals(Menu.티본스테이크, result);
+    }
 }
