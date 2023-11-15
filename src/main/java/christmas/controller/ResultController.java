@@ -8,6 +8,7 @@ import christmas.view.OutputView;
 public class ResultController {
 
     public static Result createResult(Order order, Reservation reservation) {
+        OutputView.printIntroduce(reservation.getDate());
         OutputView.printOrder(order);
         System.out.println();
         return Result.from(order.getOrderedItems(), reservation.getDate());

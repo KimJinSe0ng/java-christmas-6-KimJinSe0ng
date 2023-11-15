@@ -15,7 +15,7 @@ public enum EventBadge {
 
     public static EventBadge getBadge(int totalAfterBenefit) {
         for (EventBadge badge : values()) {
-            if (totalAfterBenefit < badge.threshold) {
+            if (totalAfterBenefit >= badge.threshold) {
                 return badge;
             }
         }

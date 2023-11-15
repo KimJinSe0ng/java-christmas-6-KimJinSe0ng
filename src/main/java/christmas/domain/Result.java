@@ -155,4 +155,8 @@ public class Result {
     public String getBadge() {
         return badge;
     }
+
+    public int getDate() {
+        return date;
+    }
 }

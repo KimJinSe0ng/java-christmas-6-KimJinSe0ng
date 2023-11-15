@@ -19,7 +19,17 @@ public enum PrintMessage {
             + "(e.g. 시저샐러드-1, 티본스테이크-1, 크리스마스파스타-1, 제로콜라-3, 아이스크림-1의 총개수는 7개)\n"),
     MONEY("원"),
     COUNT("개"),
-    NONE("없음");
+    NONE("없음"),
+    PREVIEW("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"),
+    CHRISTMAS_DISCOUNT("크리스마스 할인: -"),
+    WEEKDAY_DISCOUNT("평일 할인: -"),
+    WEEKEND_DISCOUNT("주말 할인: -"),
+    SPECIAL_DISCOUNT("특별 할인: -"),
+    SERVICE_DISCOUNT("증정 이벤트: -"),
+    BENEFIT_ALL_DISCOUNT("<총혜택 금액>"),
+    AFTER_BENEFIT_DISCOUNT("<할인 후 예상 결제 금액>"),
+    BADGE_DISCOUNT("<12월 이벤트 배지>"),
+    SERVICE_MENU("샴페인 1개");
 
 
     private final String message;
@@ -30,5 +40,9 @@ public enum PrintMessage {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getMessage(int day) {
+        return String.format(message, day);
     }
 }

@@ -27,7 +27,6 @@ public class InputView {
             String input = Console.readLine();
             Validator.isValidOrderFormat(input);
             Map<Menu, Integer> order = Validator.parseOrder(input);
-//            OutputView.printOrder(order);
             return Order.from(order);
         } catch (ValidatorException exception) {
             OutputView.println(exception.getMessage());
