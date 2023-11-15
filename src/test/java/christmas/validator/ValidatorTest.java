@@ -46,4 +46,16 @@ class ValidatorTest {
         // Then
         assertEquals(2, result);
     }
+
+    @DisplayName("주문 메뉴 개수 문자열을 숫자로 바꾸는 검증 테스트로 유효하지 않은 포맷을 입력했을 때 검증")
+    @Test
+    public void testConvertOrderStringToInt_InvalidFormat() {
+        // Given
+        String input = "abc";
+
+        // When, Then
+        ValidatorException exception = assertThrows(ValidatorException.class,
+                () -> Validator.convertOrderStringToInt(input));
+        assertEquals(ErrorMessage.INVALID_ORDER.getMessage(), exception.getMessage());
+    }
 }
