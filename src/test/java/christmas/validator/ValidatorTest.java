@@ -80,4 +80,17 @@ class ValidatorTest {
                 () -> Validator.isInRange(date));
         assertEquals(ErrorMessage.INVALID_ORDER.getMessage(), exception.getMessage());
     }
+
+    @DisplayName("메뉴 주문시 유효한 포맷으로 입력했는지 검증")
+    @Test
+    public void testIsValidOrderFormat_ValidOrderFormat() {
+        // Given
+        String order = "티본스테이크-2,초코케이크-1";
+
+        // When
+        boolean result = Validator.isValidOrderFormat(order);
+
+        // Then
+        assertTrue(result);
+    }
 }
