@@ -19,4 +19,20 @@ class MenuTest {
         // Then
         assertEquals(6_000, price, "양송이수프의 가격이 같음");
     }
+
+    @DisplayName("음료인지 검증")
+    @Test
+    public void testIsBeverage() {
+        // Given
+        Menu cola = Menu.제로콜라;
+        Menu wine = Menu.레드와인;
+        Menu champagne = Menu.샴페인;
+        Menu pasta = Menu.크리스마스파스타;
+
+        // Then
+        assertTrue(cola.isBeverage(), "제로콜라는 음료수");
+        assertTrue(wine.isBeverage(), "레드와인은 음료수");
+        assertTrue(champagne.isBeverage(), "샴페인은 음료수");
+        assertFalse(pasta.isBeverage(), "크리스마스파스타는 음료수가 아님");
+    }
 }
