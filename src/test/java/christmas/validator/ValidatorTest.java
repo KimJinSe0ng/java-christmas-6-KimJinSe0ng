@@ -33,4 +33,17 @@ class ValidatorTest {
                 () -> Validator.convertDateStringToInt(input));
         assertEquals(ErrorMessage.INVALID_DATE.getMessage(), exception.getMessage());
     }
+
+    @DisplayName("주문 메뉴 개수 문자열을 숫자로 바꾸는 것 검증")
+    @Test
+    public void testConvertOrderStringToInt_Success() {
+        // Given
+        String input = "2";
+
+        // When
+        int result = Validator.convertOrderStringToInt(input);
+
+        // Then
+        assertEquals(2, result);
+    }
 }
