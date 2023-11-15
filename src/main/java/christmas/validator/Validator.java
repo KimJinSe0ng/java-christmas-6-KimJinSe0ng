@@ -4,7 +4,9 @@ import christmas.domain.Menu;
 import christmas.exception.ErrorMessage;
 import christmas.exception.ValidatorException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +14,7 @@ public class Validator {
     private static final String DELIMITER = ",";
     private static final int FIRST_DAY = 1;
     private static final int LAST_DAY = 31;
+    private static final int MAX_MENU_COUNT = 20;
     public static int convertDateStringToInt(String input) {
         try {
             isNumeric(input);
@@ -55,19 +58,29 @@ public class Validator {
     public static Map<Menu, Integer> parseOrder(String order) {
         try {
             Map<Menu, Integer> orderMap = new HashMap<>();
+//            Set<Menu> uniqueMenus = new HashSet<>();
             String[] items = order.split(",");
+            int count = 0;
             for (String item : items) {
                 String[] parts = item.split("-");
                 validateNonNumericString(parts[0]); // 처음 들어온 값이 숫자면 에러
                 Menu menu = getMenuByName(parts[0]);
                 if (parts.length == 2) {
                     int quantity = convertOrderStringToInt(parts[1]);
+                    count += quantity;
                     orderMap.put(menu, quantity);
                 }
             }
+            isMaxCount(count);
             return orderMap;
         } catch (IllegalArgumentException exception) {
             throw ValidatorException.of(ErrorMessage.INVALID_ORDER, exception);
+        }
+    }
+
+    private static void isMaxCount(int count) {
+        if (count > MAX_MENU_COUNT) {
+            throw ValidatorException.from(ErrorMessage.INVALID_ORDER);
         }
     }
 
