@@ -19,4 +19,17 @@ class CalendarTest {
         // Then
         assertTrue(result, "평일이 맞음");
     }
+
+    @DisplayName("평일에 해당하지 않는 날짜를 입력했을 때 검증")
+    @Test
+    public void testIsNotWeekday() {
+        // Given
+        int weekday = 9;
+
+        // When
+        boolean result = Calendar.isWeekday(weekday);
+
+        // Then
+        assertFalse(result, "평일이 아님");
+    }
 }
