@@ -67,6 +67,7 @@ public class Validator {
                 Menu menu = getMenuByName(parts[0]);
                 if (parts.length == 2) {
                     int quantity = convertOrderStringToInt(parts[1]);
+                    isMinCount(quantity);
                     count += quantity;
                     orderMap.put(menu, quantity);
                 }
@@ -75,6 +76,12 @@ public class Validator {
             return orderMap;
         } catch (IllegalArgumentException exception) {
             throw ValidatorException.of(ErrorMessage.INVALID_ORDER, exception);
+        }
+    }
+
+    private static void isMinCount(int quantity) {
+        if (quantity < 1) {
+            throw ValidatorException.from(ErrorMessage.INVALID_ORDER);
         }
     }
 
