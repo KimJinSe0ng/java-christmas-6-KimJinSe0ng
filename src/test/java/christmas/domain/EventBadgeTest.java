@@ -32,4 +32,16 @@ class EventBadgeTest {
         // Then
         assertEquals(EventBadge.TREE, badge, "트리 배지");
     }
+
+    @DisplayName("배지가 산타인지 검증")
+    @Test
+    public void testGetBadge_Santa() {
+        // Given
+        int totalAfterBenefit = 25000;
+        // When
+        EventBadge badge = EventBadge.getBadge(totalAfterBenefit);
+
+        // Then
+        assertEquals(EventBadge.SANTA, badge, "산타 배지");
+    }
 }
