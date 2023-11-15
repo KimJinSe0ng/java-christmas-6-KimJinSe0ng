@@ -65,4 +65,14 @@ class MenuTest {
         assertTrue(pasta.isMain(), "크리스마스파스타는 메인요리");
         assertFalse(soup.isMain(), "양송이수프는 메인요리가 아님");
     }
+
+    @DisplayName("주문 메뉴가 메뉴에 포함되어 있는지 검증")
+    @Test
+    public void testContains_ValidItem() {
+        // Given
+        String itemName = "아이스크림";
+
+        // Then
+        assertTrue(Menu.contains(itemName), "메뉴에 아이스크림이 있어야 함");
+    }
 }
