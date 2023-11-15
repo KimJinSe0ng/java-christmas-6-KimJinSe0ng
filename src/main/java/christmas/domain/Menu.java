@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import java.util.Arrays;
+
 public enum Menu {
     양송이수프(6_000), 타파스(5_500), 시저샐러드(8_000),
     티본스테이크(55_000), 바비큐립(54_000), 해산물파스타(35_000), 크리스마스파스타(25_000),
@@ -26,5 +28,10 @@ public enum Menu {
 
     public boolean isMain() {
         return this == 티본스테이크 || this == 바비큐립 || this == 해산물파스타 || this == 크리스마스파스타;
+    }
+
+    public static boolean contains(String itemName) {
+        return Arrays.stream(Menu.values())
+                .anyMatch(menu -> menu.name().equalsIgnoreCase(itemName));
     }
 }
