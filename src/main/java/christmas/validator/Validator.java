@@ -15,6 +15,9 @@ public class Validator {
     private static final int FIRST_DAY = 1;
     private static final int LAST_DAY = 31;
     private static final int MAX_MENU_COUNT = 20;
+    private static final int MIN_MUST_COUNT = 1;
+    private static final int TRUE = 1;
+    private static final int FALSE = 0;
     public static int convertDateStringToInt(String input) {
         try {
             isNumeric(input);
@@ -61,10 +64,14 @@ public class Validator {
             Set<Menu> uniqueMenus = new HashSet<>();
             String[] items = order.split(",");
             int count = 0;
+            int beverageFlag = FALSE;
             for (String item : items) {
                 String[] parts = item.split("-");
                 validateNonNumericString(parts[0]); // 처음 들어온 값이 숫자면 에러
                 Menu menu = getMenuByName(parts[0]);
+                if (!menu.isBeverage()) {
+                    beverageFlag = TRUE;
+                }
                 isDuplicate(uniqueMenus, menu);
                 if (parts.length == 2) {
                     int quantity = convertOrderStringToInt(parts[1]);
@@ -73,10 +80,17 @@ public class Validator {
                     orderMap.put(menu, quantity);
                 }
             }
+            isOnlyBeverageOrder(beverageFlag);
             isMaxCount(count);
             return orderMap;
         } catch (IllegalArgumentException exception) {
             throw ValidatorException.of(ErrorMessage.INVALID_ORDER, exception);
+        }
+    }
+
+    private static void isOnlyBeverageOrder(int beverageFlag) {
+        if (beverageFlag == FALSE) {
+            throw ValidatorException.from(ErrorMessage.INVALID_ORDER);
         }
     }
 
@@ -87,7 +101,7 @@ public class Validator {
     }
 
     private static void isMinCount(int quantity) {
-        if (quantity < 1) {
+        if (quantity < MIN_MUST_COUNT) {
             throw ValidatorException.from(ErrorMessage.INVALID_ORDER);
         }
     }
