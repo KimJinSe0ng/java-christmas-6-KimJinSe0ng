@@ -75,4 +75,14 @@ class MenuTest {
         // Then
         assertTrue(Menu.contains(itemName), "메뉴에 아이스크림이 있어야 함");
     }
+
+    @DisplayName("주문 메뉴가 메뉴에 포함되어 있지 않은지 검증")
+    @Test
+    public void testContains_InvalidItem() {
+        // Given
+        String itemName = "피자";
+
+        // Then
+        assertFalse(Menu.contains(itemName), "메뉴에 피자가 없어야 함");
+    }
 }
