@@ -148,4 +148,14 @@ class ValidatorTest {
                 () -> Validator.parseOrder(order));
         assertEquals(ErrorMessage.INVALID_ORDER.getMessage(), exception.getMessage());
     }
+
+    @DisplayName("문자열이 숫자가 아닌지 검증")
+    @Test
+    public void testValidateNonNumericString() {
+        // Given
+        String input = "abc";
+
+        // When/Then
+        assertDoesNotThrow(() -> Validator.validateNonNumericString(input));
+    }
 }
