@@ -93,4 +93,17 @@ class ValidatorTest {
         // Then
         assertTrue(result);
     }
+
+    @DisplayName("메뉴 주문시 유효하지 않은 포맷으로 입력했는지 검증")
+    @Test
+    public void testIsValidOrderFormat_InvalidOrderFormat() {
+        // Given
+        String order = "InvalidOrderFormat";
+
+        // When
+        boolean result = Validator.isValidOrderFormat(order);
+
+        // Then
+        assertFalse(result);
+    }
 }
