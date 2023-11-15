@@ -58,4 +58,14 @@ class ValidatorTest {
                 () -> Validator.convertOrderStringToInt(input));
         assertEquals(ErrorMessage.INVALID_ORDER.getMessage(), exception.getMessage());
     }
+
+    @DisplayName("날짜가 달력 범위안에 있는지 검증")
+    @Test
+    public void testIsInRange_ValidDate() {
+        // Given
+        int date = 15;
+
+        // When, Then
+        assertDoesNotThrow(() -> Validator.isInRange(date));
+    }
 }
