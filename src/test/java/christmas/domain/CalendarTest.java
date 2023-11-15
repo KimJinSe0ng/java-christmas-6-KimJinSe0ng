@@ -71,4 +71,17 @@ class CalendarTest {
         // Then
         assertTrue(result, "특별한 날");
     }
+
+    @DisplayName("특별한 날에 해당하지 않는 날짜를 입력했을 때 검증")
+    @Test
+    public void testIsNotSpecialDay() {
+        // Given
+        int specialDay = 19;
+
+        // When
+        boolean result = Calendar.isSpecialDay(specialDay);
+
+        // Then
+        assertFalse(result, "특별한 날");
+    }
 }
