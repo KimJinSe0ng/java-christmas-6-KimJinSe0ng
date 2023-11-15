@@ -124,4 +124,16 @@ class ValidatorTest {
         assertTrue(result.containsKey(Menu.초코케이크));
         assertEquals(1, result.get(Menu.초코케이크));
     }
+
+    @DisplayName("메뉴 주문시 입력한 문자열이 파싱이 불가능한지 검증")
+    @Test
+    public void testParseOrder_InvalidOrder() {
+        // Given
+        String order = "InvalidOrder";
+
+        // When, Then
+        ValidatorException exception = assertThrows(ValidatorException.class,
+                () -> Validator.parseOrder(order));
+        assertEquals(ErrorMessage.INVALID_ORDER.getMessage(), exception.getMessage());
+    }
 }
