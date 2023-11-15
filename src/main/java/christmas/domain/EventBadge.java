@@ -1,9 +1,10 @@
 package christmas.domain;
 
 public enum EventBadge {
-    STAR(5000, "별"),
+    SANTA(20000, "산타"),
     TREE(10000, "트리"),
-    SANTA(20000, "산타");
+    STAR(5000, "별"),
+    NONE(0, "없음");
 
     private final int threshold;
     private final String description;
@@ -19,7 +20,7 @@ public enum EventBadge {
                 return badge;
             }
         }
-        return EventBadge.SANTA;
+        return EventBadge.NONE;
     }
 
     public String getDescription() {
