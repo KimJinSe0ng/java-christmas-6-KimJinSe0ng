@@ -11,7 +11,7 @@ class EventBadgeTest {
     @Test
     public void testGetBadge_Star() {
         // Given
-        int totalAfterBenefit = 4000;
+        int totalAfterBenefit = 6000;
 
         // When
         EventBadge badge = EventBadge.getBadge(totalAfterBenefit);
@@ -24,7 +24,7 @@ class EventBadgeTest {
     @Test
     public void testGetBadge_Tree() {
         // Given
-        int totalAfterBenefit = 9000;
+        int totalAfterBenefit = 10000;
 
         // When
         EventBadge badge = EventBadge.getBadge(totalAfterBenefit);
