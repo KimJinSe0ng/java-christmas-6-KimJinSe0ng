@@ -35,4 +35,18 @@ class MenuTest {
         assertTrue(champagne.isBeverage(), "샴페인은 음료수");
         assertFalse(pasta.isBeverage(), "크리스마스파스타는 음료수가 아님");
     }
+
+    @DisplayName("디저트인지 검증")
+    @Test
+    public void testIsDessert() {
+        // Given
+        Menu cake = Menu.초코케이크;
+        Menu iceCream = Menu.아이스크림;
+        Menu pasta = Menu.크리스마스파스타;
+
+        // Then
+        assertTrue(cake.isDessert(), "초코케이크는 디저트");
+        assertTrue(iceCream.isDessert(), "아이스크림은 디저트");
+        assertFalse(pasta.isDessert(), "크리스마스파스타는 디저트가 아님");
+    }
 }
